@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <title>incompetentai.com</title>
+    <style>
+        /* body { margin: 3rem auto; max-width: 800px;} */
+        /* h1 { color: #333; } */
+        .article {
+            margin-bottom: 40px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card-content {
+            flex-grow: 1;
+            /* Makes sure content fills available space */
+        }
+
+        @media (max-width: 768px) {
+
+            .card,
+            .card-image img {
+                border-radius: 0 !important;
+                /* Ensures no rounding */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title is-1">incompetentai</h1>
+            <p class="subtitle is-3">AI sucks.</p>
+            {% for article in articles %}
+            <div class="box">
+                <div class="columns">
+                    <div class="column is-4">
+                        <figure class="image">
+                            <img src="{{ article.urlToImage }}" alt="" />
+                        </figure>
+                    </div>
+                    <div class="column content">
+                        <p class="heading">{{ article.publishedAt | timesince }} ago</p>
+                        <p>
+                            <a class="title is-size-4" href="{{ article.url }}">
+                                {{ article.title }}
+                            </a>
+                        </p>
+                        <div class="content">{{ article.content|truncatechars:260 }} <a class="has-text-weight-bold" href="{{article.url}}">Read more
+                                →</a></div>
+                        <small>Source: {{ article.source.name }}</small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</body>
+
+</html>

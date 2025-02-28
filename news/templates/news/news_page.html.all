@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <title>incompetentai.com</title>
+    <style>
+        /* body { margin: 3rem auto; max-width: 800px;} */
+        /* h1 { color: #333; } */
+        .article { margin-bottom: 40px; }
+
+        
+        .card {
+           display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .card-content {
+            flex-grow: 1; /* Makes sure content fills available space */
+        }
+        @media (max-width: 768px) {
+            .card, 
+                .card-image img {
+                border-radius: 0 !important; /* Ensures no rounding */
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <h1 class="title is-1">incompetentai</h1>
+
+            {% for article in articles %}
+            <div class="media">
+                
+                    
+                
+            
+                <div class="media-content">
+                    
+                    <p class="heading">{{ article.publishedAt }}</p>
+                    <!-- <h2 class="title">{{ article.title }}</h2> -->
+                    <h2 class="title is-5"><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h2>
+                    <!-- <p class="content">{{ article.description|default:"No description available." }}</p> -->
+                    <small>Source: {{ article.source.name }}</small>
+                </div>
+                
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section class="section">
+        <div class="container is-max-desktop">
+            {% for article in articles %}
+                <article class="media">
+                    <figure class="media-left">
+                        <p class="image is-128x128">
+                        <img src="{{ article.urlToImage }}" 
+                                onerror="this.onerror=null; this.src='https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmV4b2h2NXJvNW1sZG1qcHJyc24xaGJqeGtvb28xMzI3MDNmeXUzOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Ps89uHS7n72j6/giphy.gif';" 
+                
+                            alt="Placeholder image"/>
+                        </p>
+                    </figure>
+                    <div class="media-content">
+                        <p class="title">{{ article.title }}</p>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+    <section class="section">
+    <div class="container is-max-desktop">
+            <h1 class="title is-1">incompetentai</h1>
+            <div class="block content">
+                <ol>
+                    {% for article in articles %}
+                        <li>
+                            <article class="my-6">
+                                <p class="title">{{ article.title }}</p>
+                                <p class="subtitle">
+
+                                    <a class="hax-text-link"href="{{ article.url }}" target="_blank">{{ article.url }}</a>
+                                </p>
+                                
+                            </article>
+                        </li>
+                    {% endfor %}
+                </ol>
+            </div>
+            
+        </div>
+    </section>
+    
+    
+    
+
+    {% if articles %}
+    <section class="section">
+    <div class="container is-max-desktop">
+    <ol>
+    {% for article in articles %}
+        <li class="title">
+        <article class="media">
+            <div class="media-content">
+            <!-- <p class="heading">{{ article.publishedAt }}</p> -->
+            <h2 class="title">{{ article.title }}</h2>
+            <p class="subtitle">
+                <a class="has-text-link" href="{{ article.url }}" target="_blank">{{ article.url }}</a>
+            </p>
+            
+            <div class="block content">
+            
+                <!-- <small>Source: {{ article.source.name }}</small> -->
+            </div>
+        </div>
+        </article>
+        </li>
+    
+    {% endfor %}
+    </ol>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <div class="columns is-multiline">
+            {% for article in articles %}
+            
+                <div class="column is-one-third">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image ">
+                                <img src="{{ article.urlToImage }}" 
+                                    onerror="this.onerror=null; this.src='https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmV4b2h2NXJvNW1sZG1qcHJyc24xaGJqeGtvb28xMzI3MDNmeXUzOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Ps89uHS7n72j6/giphy.gif';" 
+                    
+                                alt="Placeholder image"/>
+                                
+                          </figure>
+                        </div>
+                    
+                        <div class="card-content">
+                            <p class="heading">{{ article.publishedAt }}</p>
+                            <!-- <h2 class="title">{{ article.title }}</h2> -->
+                            <h2 class="title is-5"><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h2>
+                            <!-- <p class="content">{{ article.description|default:"No description available." }}</p> -->
+                            <small>Source: {{ article.source.name }}</small>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            {% endfor %}
+        </div>
+        {% else %}
+            <p>No news found for today.</p>
+        {% endif %}
+    </div>
+</section>
+    
+</body>
+</html>
